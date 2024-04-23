@@ -2,3 +2,6 @@ node_modules/
 .vscode/
 output.pdf
 .env.local
+
+# Ignore Terraform provider binaries
+**/.terraform/**
