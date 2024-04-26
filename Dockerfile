@@ -1,18 +1,14 @@
-# Use an official Node runtime as a parent image
-FROM node:16-alpine
+FROM ghcr.io/puppeteer/puppeteer:22.6.5
 
-# Set the working directory in the Docker container
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true \
+    PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
+
 WORKDIR /usr/src/app
 
-# Install app dependencies by copying package.json and package-lock.json (if available)
-COPY package*.json ./
-RUN npm install
+COPY package**.json ./
 
-# Bundle app source inside Docker image
+RUN npm ci
+
 COPY . .
 
-# Your app binds to port 3000 so you'll use the EXPOSE instruction to have it mapped by the docker daemon
-EXPOSE 3000
-
-# Define the command to run your app using CMD which defines your runtime
 CMD ["node", "server.js"]

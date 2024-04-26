@@ -4,17 +4,21 @@ provider "aws" {
 
 resource "aws_s3_bucket" "air_label_bucket" {
   bucket = "air-label-bucket"
+}
 
-  lifecycle_rule {
-    id      = "expire_objects"
-    enabled = true
+resource "aws_s3_bucket_lifecycle_configuration" "aws_s3_bucket_lifecycle" {
+  bucket = aws_s3_bucket.air_label_bucket.id
+
+  rule {
+    id     = "expire_objects"
+    status = "Enabled"
 
     expiration {
       days = 1
     }
 
     noncurrent_version_expiration {
-      days = 1
+      noncurrent_days = 1
     }
   }
 }

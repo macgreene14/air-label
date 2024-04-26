@@ -13,11 +13,13 @@ const bucketName = process.env.BUCKET_NAME;
 
 // create instance of express server
 const app = express();
-const port = process.env.PORT || 3000; 
+const port = process.env.PORT || 3000;
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.status(200).send("<p>Welcome to Airlabel. Submit post reqeust to /html-to-pdf.</p>");
+  res
+    .status(200)
+    .send("<p>Welcome to Airlabel. Submit post reqeust to /html-to-pdf.</p>");
 });
 
 app.post("/html-to-pdf", async (req, res) => {
@@ -41,10 +43,8 @@ app.post("/html-to-pdf", async (req, res) => {
       pdfBuffer
     );
 
-    res.status(200).send({message: `Successfully generated PDF: ${url}`});
-
+    res.status(200).send({ message: `Successfully generated PDF: ${url}` });
   } catch (e) {
-
     (e) => res.status(500).send(e);
   }
 });
