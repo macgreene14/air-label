@@ -43,7 +43,7 @@ app.post("/html-to-pdf", async (req, res) => {
       pdfBuffer
     );
 
-    res.status(200).send({ message: `Successfully generated PDF: ${url}` });
+    res.status(200).send({ url: url });
   } catch (e) {
     (e) => res.status(500).send(e);
   }
