@@ -21,6 +21,9 @@ export default async function htmlToPDF(html, pdfOptions) {
   });
   const page = await browser.newPage();
 
+  // disable javascript
+  page.setJavaScriptEnabled(false);
+
   // Set page content to modified HTML
   await page.setContent(htmlWithQr, {
     waitUntil: "networkidle0", // Wait for all network connections to finish
